@@ -26,11 +26,18 @@ const storeFileLocally = async (file: File) => {
 }
 
 const uploadAction = async (formData: FormData) => {
-  const file = formData.get("file") as File
+  try {
+    const file = formData.get("file") as File
 
-  const { name, localFilePath } = await storeFileLocally(file)
+    const { name, localFilePath } = await storeFileLocally(file)
 
-  Cloudinary.upload({ name, path: localFilePath })
+    await Cloudinary.upload({ name, path: localFilePath })
+
+    return true
+  } catch (error) {
+    console.log({ error })
+    return false
+  }
 }
 
 export default uploadAction
