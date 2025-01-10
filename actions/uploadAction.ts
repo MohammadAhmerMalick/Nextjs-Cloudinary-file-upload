@@ -10,7 +10,8 @@ const storeFileLocally = async (file: File) => {
   const name = `${randomUUID()}_${file.name}`
 
   // check if mkdir folder locally exists
-  await mkdir("./tmp", { recursive: true })
+  if (process.env.NODE_ENV === "development")
+    await mkdir("./tmp", { recursive: true })
 
   // local file path
   const localFilePath =
