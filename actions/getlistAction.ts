@@ -15,18 +15,24 @@ export interface getlistActionResponse {
   secure_url: string
   type: string
   url: string
+  folder: string
   version: number
   width: number
 }
 
-const getlistAction = async (): Promise<getlistActionResponse[]> => {
+interface Return {
+  success: boolean
+  data: getlistActionResponse[]
+}
+
+const getlistAction = async (): Promise<Return> => {
   try {
     const res = await Cloudinary.list()
-    if (!!res.resources) return res.resources
-    return []
+    if (!!res.resources) return { success: true, data: res.resources }
+    return { success: false, data: [] }
   } catch (error) {
     console.log(error)
-    return []
+    return { success: false, data: [] }
   }
 }
 

@@ -29,8 +29,6 @@ class Cloudinary {
 
   static list = () =>
     cloudinary.api.resources({ type: "upload", max_results: 500 })
-
-  static delete = (publicId: string) => cloudinary.uploader.destroy(publicId)
 }
 
 export default Cloudinary
