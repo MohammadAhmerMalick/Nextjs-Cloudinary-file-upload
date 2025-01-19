@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 
 import getlistAction, {
   type getlistActionResponse,
-} from "@/actions/getlistAction"
-import uploadAction from "@/actions/uploadAction"
+} from '@/actions/getListAction'
+import uploadAction from '@/actions/uploadAction'
 
 export default function Home() {
   const FORM = useRef<HTMLFormElement>(null)
@@ -15,7 +15,7 @@ export default function Home() {
 
   const getUploadedFiles = async () => {
     const { data, success } = await getlistAction()
-    if (!success) console.error("Unable to fetch data")
+    if (!success) console.error('Unable to fetch data')
     else setFiles(data)
   }
 
@@ -24,7 +24,7 @@ export default function Home() {
     const form = FORM.current as HTMLFormElement
     const formData = new FormData(form)
     const success = await uploadAction(formData)
-    if (!success) console.error("Unable to upload")
+    if (!success) console.error('Unable to upload')
     else {
       form.reset()
       getUploadedFiles()
@@ -41,9 +41,9 @@ export default function Home() {
       <form ref={FORM} onChange={onUpload} className="flex items-center gap-2">
         <label
           htmlFor="file"
-          className="block w-full cursor-pointer rounded bg-[#febe00] p-2 text-black text-center"
+          className="block w-full cursor-pointer rounded bg-[#febe00] p-2 text-center text-black"
         >
-          {uploading ? "uploading" : "Click to upload or drag and drop"}
+          {uploading ? 'uploading' : 'Click to upload or drag and drop'}
           <input
             disabled={uploading}
             required
@@ -77,8 +77,8 @@ export default function Home() {
                 </span>
                 <span className="block">{bytes} Bytes</span>
                 <span className="block">
-                  {new Date(created_at || "").toLocaleTimeString()}{" "}
-                  {new Date(created_at || "").toLocaleDateString()}
+                  {new Date(created_at || '').toLocaleTimeString()}{' '}
+                  {new Date(created_at || '').toLocaleDateString()}
                 </span>
               </p>
             </a>
